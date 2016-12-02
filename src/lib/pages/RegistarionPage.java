@@ -1,11 +1,13 @@
 package lib.pages;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class RegistarionPage extends Page {
 	
@@ -37,6 +39,23 @@ public class RegistarionPage extends Page {
 	@FindBy(id="confirm_password_password_2")
 	private WebElement repeatPass;
 	
+	@FindBy(xpath = "id('pie_register')/li[3]/div/div[1]/input[1]")
+	private WebElement hobbyDancing;
+	
+	@FindBy(xpath = "id('pie_register')/li[3]/div/div[1]/input[1]")
+	private WebElement hobbyReading;
+	
+	@FindBy(xpath = "id('pie_register')/li[3]/div/div[1]/input[1]")
+	private WebElement hobbyCricket;
+	
+	@FindBy(id="dropdown_7")
+	private WebElement selectcountry;
+	
+	@FindBy(xpath = "id('pie_register')/li[14]/div/input")
+	private WebElement submitButton;
+	
+	@FindBy(xpath = "id('post-49')/div/p")
+	private WebElement success;
 	
 	public RegistarionPage(WebDriver driver) {
 		super(driver);
@@ -88,4 +107,40 @@ public class RegistarionPage extends Page {
 				}
 				
 	}
+	
+	public void selectCheckboxHobbyReading(boolean bValue){
+		if(bValue != hobbyReading.isSelected()){
+			hobbyReading.click();
+		};
+	}
+	
+	public void selectCheckboxHobbyDancing(boolean bValue){
+		if(bValue != hobbyDancing.isSelected()){
+			hobbyReading.click();
+		};
+	}
+	
+	public void selectCheckboxHobbyCricket(boolean bValue){
+		if(bValue != hobbyCricket.isSelected()){
+			hobbyReading.click();
+		};
+	}
+	public void seolectCountry(String country){
+		Select select = new Select(selectcountry);
+		select.selectByValue(country);
+	}
+	
+	public void clickOnSubmitButton(){
+		submitButton.click();
+	}
+	
+	public boolean isDisplayedSuccessRegMsg(){
+		try{
+			return success.isDisplayed();
+		}catch(NoSuchElementException e){
+			return false;
+		}
+		
+	}
+	
 }
